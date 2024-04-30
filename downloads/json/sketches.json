@@ -995,6 +995,60 @@
     "id": "uCEmQeym0"
   },
   {
+    "name": "Final Project",
+    "_id": "yO5ecOz8m",
+    "updatedAt": "2024-04-16T13:10:54.420Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "661e6857ca3129fbd659020f",
+          "661e6857ca3129fbd659020e",
+          "661e6857ca3129fbd6590210"
+        ],
+        "fileType": "folder",
+        "_id": "661e6857ca3129fbd6590211",
+        "createdAt": "2024-04-16T13:10:54.420Z",
+        "updatedAt": "2024-04-16T13:10:54.420Z",
+        "id": "661e6857ca3129fbd6590211"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// original sketch https://openprocessing.org/sketch/1990191\n//number of particles for each types\nlet  num = 3000;\n// three types of particles a, b and c\nvar particles_a = [];\nvar particles_b = [];\nvar particles_c = [];\nvar fade = 100; // the length of the particle tail\nvar radius = 3; // radius of the particles\n\n//scale of curviness of the noise \nlet noiseScale = 300;\n\n//how often the direction of the noise change\nlet noiseStrength = 1.2;\n\n\nfunction setup() {\n  createCanvas(1200, 900);\n  noStroke();\n  for (let i=0; i<num; i++) {\n    let loc_a = createVector(random(width*1.2), random(height), 2);\n    let angle_a = random(TWO_PI);\n    let dir_a = createVector(cos(angle_a), sin(angle_a));\n\t\tlet loc_b = createVector(random(width*1.2), random(height), 2);\n    let angle_b = random(TWO_PI);\n    let dir_b = createVector(cos(angle_b), sin(angle_b));\n\t\tlet loc_c = createVector(random(width*1.2), random(height), 2);\n    let angle_c = random(TWO_PI);\n    let dir_c = createVector(cos(angle_c), sin(angle_c));\n\n    //particles[i]= new Particle(loc, dir, speed); slower particles will looks shorter \n\t\tparticles_a[i] = new Particle(loc_a, dir_a, 2);\n\t\tparticles_b[i] = new Particle(loc_b, dir_b, 2);\n\t\tparticles_c[i] = new Particle(loc_c, dir_c, 3);\n\t\t\n  }\n}\n\nfunction draw() {\n\t\n\t//smooth();\n  //background(0); // comment the background to see the particle tails uncomment to hide the tails\n\t\t\t\n  fill(0, 5); // put a hight value for hiding the tails \n  noStroke();\n  rect(0, 0, width, height);\n    \n  for (let i=0; i<num; i++) {\n\t\t\n\t\tfill(255, fade); //white\n\t\tparticles_a[i].move();\n\t\tparticles_a[i].update(radius);\n\t\tparticles_a[i].checkEdges();\n\n\t\tfill(227 , 6 , 19, fade); //turqouise\n\t\tparticles_b[i].move();\n\t\tparticles_b[i].update(radius);\n\t\tparticles_b[i].checkEdges();\n\n\t\tfill(height, mouseY , mouseX , fade); // blue\n\t\tparticles_c[i].move();\n\t\tparticles_c[i].update(radius);\n\t\tparticles_c[i].checkEdges();\n  }\n}\n\nlet Particle = function(loc_, dir_, speed_) {\n  this.loc = loc_;\n\tthis.dir = dir_;\n\tthis.speed = speed_;\n\tthis.d = 1;\n};\n\nParticle.prototype.run = function() {\n\t  this.move();\n    this.checkEdges();\n    this.update();\n};\n\n// Method to move position\nParticle.prototype.move = function(){\n\t  this.angle=noise(this.loc.x/noiseScale, this.loc.y/noiseScale, frameCount/noiseScale)*TWO_PI*noiseStrength;\n    this.dir.x = cos(this.angle)+sin(this.angle)-sin(this.angle);\n    this.dir.y = sin(this.angle)-cos(this.angle)*sin(this.angle);\n    this.vel = this.dir.copy();\n    this.vel.mult(this.speed*this.d);\n    this.loc.add(this.vel);\n};\n\n// Method to chech edges \nParticle.prototype.checkEdges = function(){\n if (this.loc.x < 0 || this.loc.x > width || this.loc.y < 0 || this.loc.y > height) {    \n      this.loc.x = random(width*1.2);\n      this.loc.y = random(height);\n    }\n};\n\n\n// Method to update position\nParticle.prototype.update = function(r){\n    ellipse(this.loc.x, this.loc.y, r);\n};",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e6857ca3129fbd659020e",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-16T13:10:54.420Z",
+        "updatedAt": "2024-04-16T13:10:54.420Z",
+        "id": "661e6857ca3129fbd659020e"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e6857ca3129fbd659020f",
+        "createdAt": "2024-04-16T13:10:54.420Z",
+        "updatedAt": "2024-04-16T13:10:54.420Z",
+        "id": "661e6857ca3129fbd659020f"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e6857ca3129fbd6590210",
+        "createdAt": "2024-04-16T13:10:54.420Z",
+        "updatedAt": "2024-04-16T13:10:54.420Z",
+        "id": "661e6857ca3129fbd6590210"
+      }
+    ],
+    "createdAt": "2024-04-16T12:01:03.686Z",
+    "id": "yO5ecOz8m"
+  },
+  {
     "name": "Fortune Cookie",
     "_id": "08EZ0ei2X",
     "updatedAt": "2023-04-28T22:05:03.801Z",
@@ -1477,8 +1531,8 @@
         ],
         "fileType": "folder",
         "_id": "660270c58750ebc1c48b3266",
-        "updatedAt": "2024-03-26T06:58:16.666Z",
-        "createdAt": "2024-03-26T06:58:16.666Z",
+        "updatedAt": "2024-03-26T14:07:44.597Z",
+        "createdAt": "2024-03-26T14:07:44.597Z",
         "id": "660270c58750ebc1c48b3266"
       },
       {
@@ -1487,8 +1541,8 @@
         "children": [],
         "fileType": "file",
         "_id": "660270c58750ebc1c48b3268",
-        "updatedAt": "2024-03-26T06:58:16.666Z",
-        "createdAt": "2024-03-26T06:58:16.666Z",
+        "updatedAt": "2024-03-26T14:07:44.597Z",
+        "createdAt": "2024-03-26T14:07:44.597Z",
         "isSelectedFile": true,
         "id": "660270c58750ebc1c48b3268"
       },
@@ -1498,8 +1552,8 @@
         "children": [],
         "fileType": "file",
         "_id": "660270c58750ebc1c48b3267",
-        "updatedAt": "2024-03-26T06:58:16.666Z",
-        "createdAt": "2024-03-26T06:58:16.666Z",
+        "updatedAt": "2024-03-26T14:07:44.597Z",
+        "createdAt": "2024-03-26T14:07:44.597Z",
         "id": "660270c58750ebc1c48b3267"
       },
       {
@@ -1508,14 +1562,422 @@
         "children": [],
         "fileType": "file",
         "_id": "660270c58750ebc1c48b3269",
-        "updatedAt": "2024-03-26T06:58:16.666Z",
-        "createdAt": "2024-03-26T06:58:16.666Z",
+        "updatedAt": "2024-03-26T14:07:44.597Z",
+        "createdAt": "2024-03-26T14:07:44.597Z",
         "id": "660270c58750ebc1c48b3269"
       }
     ],
     "createdAt": "2024-03-26T06:52:53.459Z",
-    "updatedAt": "2024-03-26T06:58:16.666Z",
+    "updatedAt": "2024-03-26T14:07:44.597Z",
     "id": "CHGZXqDjz"
+  },
+  {
+    "name": "ims02-paulineium",
+    "_id": "IweQ98r2b",
+    "updatedAt": "2024-04-16T13:43:54.647Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "660bf5341642ecb7a65f0a8a",
+          "660bf5341642ecb7a65f0a89",
+          "660bf5341642ecb7a65f0a8b"
+        ],
+        "fileType": "folder",
+        "_id": "660bf5341642ecb7a65f0a8c",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T13:43:54.647Z",
+        "updatedAt": "2024-04-16T13:43:54.647Z",
+        "id": "660bf5341642ecb7a65f0a8c"
+      },
+      {
+        "name": "sketch.js",
+        "content": "function setup() {\n  createCanvas(windowWidth, windowHeight);\n  noStroke();\n  frameRate(30);\n\n  // Create fullscreen toggle button\n  let fsButton = createButton('Toggle Fullscreen');\n  fsButton.position(20, 20);\n  fsButton.mousePressed(toggleFullscreen);\n}\n\nfunction draw() {\n  background(20, 20, 25, 25); // Slightly transparent\n\n  // Moving shapes\n  for (let i = 0; i < 5; i++) {\n    drawMovingShape(i);\n  }\n}\n\nlet shapes = [\n  { x: 100, y: 100, size: 60, xspeed: 2, yspeed: 3.5, color: [255, 204, 0] },\n  { x: 200, y: 200, size: 80, xspeed: 3, yspeed: 2.5, color: [0, 204, 255] },\n  { x: 300, y: 300, size: 50, xspeed: 2.5, yspeed: 3, color: [255, 0, 204] },\n  { x: 400, y: 400, size: 70, xspeed: 3.5, yspeed: 2, color: [204, 255, 0] },\n  { x: 500, y: 100, size: 90, xspeed: 2, yspeed: 2.5, color: [0, 255, 204] }\n];\n\nfunction drawMovingShape(index) {\n  let shape = shapes[index];\n  \n  fill(shape.color);\n  ellipse(shape.x, shape.y, shape.size, shape.size);\n  \n  // Move the shape\n  shape.x += shape.xspeed;\n  shape.y += shape.yspeed;\n  \n  // Check for canvas boundaries and reverse speed direction if needed\n  if (shape.x > width - shape.size / 2 || shape.x < shape.size / 2) {\n    shape.xspeed *= -1;\n    shape.color = [random(255), random(255), random(255)]; // Change color on bounce\n  }\n  if (shape.y > height - shape.size / 2 || shape.y < shape.size / 2) {\n    shape.yspeed *= -1;\n    shape.color = [random(255), random(255), random(255)]; // Change color on bounce\n  }\n}\n\nfunction toggleFullscreen() {\n  let fs = fullscreen();\n  fullscreen(!fs);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "660bf5341642ecb7a65f0a89",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-16T13:43:54.647Z",
+        "updatedAt": "2024-04-16T13:43:54.647Z",
+        "id": "660bf5341642ecb7a65f0a89"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "660bf5341642ecb7a65f0a8a",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T13:43:54.647Z",
+        "updatedAt": "2024-04-16T13:43:54.647Z",
+        "id": "660bf5341642ecb7a65f0a8a"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "660bf5341642ecb7a65f0a8b",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T13:43:54.647Z",
+        "updatedAt": "2024-04-16T13:43:54.647Z",
+        "id": "660bf5341642ecb7a65f0a8b"
+      }
+    ],
+    "createdAt": "2024-04-02T12:21:27.287Z",
+    "id": "IweQ98r2b"
+  },
+  {
+    "name": "ims03-paulineium",
+    "_id": "mfF-qYkEJ",
+    "updatedAt": "2024-04-16T13:50:18.950Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "661e81dbceb485b633d17871",
+          "661e81dbceb485b633d17870",
+          "661e81dbceb485b633d17872"
+        ],
+        "fileType": "folder",
+        "_id": "661e81dbceb485b633d17873",
+        "createdAt": "2024-04-16T13:50:18.950Z",
+        "updatedAt": "2024-04-16T13:50:18.950Z",
+        "id": "661e81dbceb485b633d17873"
+      },
+      {
+        "name": "sketch.js",
+        "content": "let particles = [];\nlet numParticles = 100;\n\nfunction setup() {\n  createCanvas(windowWidth, windowHeight);\n  colorMode(HSB, 360, 100, 100, 100);\n  for (let i = 0; i < numParticles; i++) {\n    particles.push(new Particle(random(width), random(height)));\n  }\n  \n  // Fullscreen toggle button\n  let fsButton = createButton('Toggle Fullscreen');\n  fsButton.position(10, 10);\n  fsButton.mousePressed(toggleFullscreen);\n}\n\nfunction draw() {\n  setGradient(0, 0, width, height, color(200, 60, 60), color(280, 60, 100), \"Y\");\n  \n  particles.forEach(p => {\n    p.update();\n    p.edges();\n    p.show();\n  });\n}\n\nfunction toggleFullscreen() {\n  let fs = fullscreen();\n  fullscreen(!fs);\n}\n\nclass Particle {\n  constructor(x, y) {\n    this.pos = createVector(x, y);\n    this.vel = p5.Vector.random2D();\n    this.vel.mult(random(0.5, 2));\n    this.acc = createVector(0, 0);\n    this.r = 4;\n    this.lifetime = 255;\n  }\n\n  applyForce(force) {\n    this.acc.add(force);\n  }\n\n  edges() {\n    if (this.pos.x > width - this.r || this.pos.x < this.r) {\n      this.vel.x *= -1;\n    }\n    if (this.pos.y > height - this.r || this.pos.y < this.r) {\n      this.vel.y *= -1;\n    }\n  }\n\n  update() {\n    this.vel.add(this.acc);\n    this.pos.add(this.vel);\n    this.acc.mult(0);\n    this.lifetime -= 2;\n  }\n\n  show() {\n    noStroke();\n    fill(255, this.lifetime);\n    ellipse(this.pos.x, this.pos.y, this.r * 2);\n  }\n}\n\nfunction setGradient(x, y, w, h, c1, c2, axis) {\n  noFill();\n  if (axis === \"Y\") {  // Top to bottom gradient\n    for (let i = y; i <= y + h; i++) {\n      let inter = map(i, y, y + h, 0, 1);\n      let c = lerpColor(c1, c2, inter);\n      stroke(c);\n      line(x, i, x + w, i);\n    }\n  }\n}\n\nfunction windowResized() {\n  resizeCanvas(windowWidth, windowHeight);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e81dbceb485b633d17870",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-16T13:50:18.950Z",
+        "updatedAt": "2024-04-16T13:50:18.950Z",
+        "id": "661e81dbceb485b633d17870"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e81dbceb485b633d17871",
+        "createdAt": "2024-04-16T13:50:18.950Z",
+        "updatedAt": "2024-04-16T13:50:18.950Z",
+        "id": "661e81dbceb485b633d17871"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e81dbceb485b633d17872",
+        "createdAt": "2024-04-16T13:50:18.950Z",
+        "updatedAt": "2024-04-16T13:50:18.950Z",
+        "id": "661e81dbceb485b633d17872"
+      }
+    ],
+    "createdAt": "2024-04-16T13:50:18.950Z",
+    "id": "mfF-qYkEJ"
+  },
+  {
+    "name": "ims05-paulineium",
+    "_id": "JU7KZlsY1",
+    "updatedAt": "2024-04-30T11:36:55.230Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "663076b45ae928001a8bf4a6",
+          "663076b410bb2f001935b078",
+          "663076b45ae928001a8bf4ab",
+          "663076b510bb2f001935b07d",
+          "6627a086e415455ca5be16e2",
+          "6627a086e415455ca5be16e1",
+          "6627a086e415455ca5be16e3"
+        ],
+        "fileType": "folder",
+        "_id": "6627a086e415455ca5be16e4",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "isSelectedFile": false,
+        "id": "6627a086e415455ca5be16e4"
+      },
+      {
+        "name": "sketch.js",
+        "content": "let imgs = [\"0.jpeg\", \"1.jpeg\", \"2.jpeg\", \"3.jpeg\"]; // Array of image paths\nlet img;\nlet imgIndex = 0; // To track current image\nlet tilesX = 10; // Start with initial tilesX count\nlet animating = true; // Flag to animate tiles\nlet timeSwitch = 5000; // Time interval to switch images (5 seconds)\nlet lastSwitch = 0; // Timestamp of last image switch\n\nfunction setup() {\n  createCanvas(windowWidth, windowHeight); \n  loadNewImage();\n}\n\nfunction draw() {\n  background('#f1f1f1'); // Refresh background each frame\n  fill('#111111'); // Set fill color\n  noStroke(); // No borders on shapes\n\n  if (img) {\n    // Aspect ratio calculations\n    let imgRatio = img.height / img.width; // Image aspect ratio\n    let canvasRatio = height / width; // Canvas aspect ratio\n    let tilesY = tilesX * imgRatio; // Number of tiles in Y direction\n    let tileSize = width / tilesX; // Tile size\n\n    let scaleFactor = min(width / img.width, height / img.height); // Scale factor to fit the image within the canvas\n    let scaledWidth = img.width * scaleFactor;\n    let scaledHeight = img.height * scaleFactor;\n\n    let xOffset = (width - scaledWidth) / 2; // X offset to center the image\n    let yOffset = (height - scaledHeight) / 2; // Y offset to center the image\n\n    // Check if time to switch image\n    if (millis() - lastSwitch > timeSwitch) {\n      lastSwitch = millis();\n      imgIndex = (imgIndex + 1) % imgs.length; // Cycle through images\n      loadNewImage(); // Load new image\n    }\n\n    // Loop through image pixels and draw rectangles\n    for (let y = 0; y < scaledHeight; y += tileSize) {\n      for (let x = 0; x < scaledWidth; x += tileSize) {\n        let c = img.get(x / scaleFactor, y / scaleFactor); // Get color from image pixel\n        let b = map(brightness(c), 0, 255, 1, 0); // Map brightness to a scale\n        push(); // Save current drawing state\n        translate(x + xOffset, y + yOffset); // Move coordinate system to tile\n        rect(0, 0, b * tileSize, b * tileSize); // Draw rectangle scaled by brightness\n        pop(); // Restore original drawing state\n      }\n    }\n    \n    // Increment tilesX smoothly over time to animate tiles\n    tilesX += 0.1;\n    if (tilesX > 100) tilesX = 10; // Reset tilesX when it exceeds 100\n  }\n}\n\nfunction loadNewImage() {\n  img = loadImage(imgs[imgIndex]); // Load image from array\n}\n\n// Fullscreen toggle\nfunction keyPressed() {\n  if (key === 'F') {\n    let fs = fullscreen();\n    fullscreen(!fs); // Toggle fullscreen mode\n    resizeCanvas(windowWidth, windowHeight); // Resize canvas to new dimensions\n  }\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6627a086e415455ca5be16e1",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "id": "6627a086e415455ca5be16e1"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6627a086e415455ca5be16e2",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "isSelectedFile": false,
+        "id": "6627a086e415455ca5be16e2"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6627a086e415455ca5be16e3",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "isSelectedFile": false,
+        "id": "6627a086e415455ca5be16e3"
+      },
+      {
+        "name": "1.jpeg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "663076b410bb2f001935b078",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/3fe5c858-ff47-4886-b39b-2012b1efe1e4.jpeg",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "id": "663076b410bb2f001935b078"
+      },
+      {
+        "name": "0.jpeg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "663076b45ae928001a8bf4a6",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/90f1f928-d084-4e73-86b7-4b038a6df524.jpeg",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "id": "663076b45ae928001a8bf4a6"
+      },
+      {
+        "name": "2.jpeg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "663076b45ae928001a8bf4ab",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/bbc10c59-ab06-47ff-8e7b-7c39bd1dd98b.jpeg",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "id": "663076b45ae928001a8bf4ab"
+      },
+      {
+        "name": "3.jpeg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "663076b510bb2f001935b07d",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/2d5f10c9-5d20-4256-b9df-c5fd8b59c6ed.jpeg",
+        "updatedAt": "2024-04-30T11:36:55.230Z",
+        "createdAt": "2024-04-30T11:36:55.230Z",
+        "id": "663076b510bb2f001935b07d"
+      }
+    ],
+    "createdAt": "2024-04-23T11:52:59.782Z",
+    "id": "JU7KZlsY1"
+  },
+  {
+    "name": "ims05-paulineium",
+    "_id": "Z2wnB1GRX",
+    "updatedAt": "2024-04-23T11:50:25.109Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "661e929b3f9f7b508ddb52b2",
+          "661e920f3f9f7b508ddb52af",
+          "661e920f3f9f7b508ddb52ae",
+          "661e920f3f9f7b508ddb52b0"
+        ],
+        "fileType": "folder",
+        "_id": "661e920f3f9f7b508ddb52b1",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-23T11:50:25.109Z",
+        "updatedAt": "2024-04-23T11:50:25.109Z",
+        "id": "661e920f3f9f7b508ddb52b1"
+      },
+      {
+        "name": "sketch.js",
+        "content": "let img; // Declare image\n\nfunction setup() {\n  createCanvas(400, 580); // Setup canvas\n  background('#f1f1f1'); // Background color\n  img = loadImage(\"bw2.jpg\"); // Load image\n}\n\nfunction draw() {\n  background('#f1f1f1'); // Refresh background each frame\n  fill('#111111'); // Set fill color\n  noStroke(); // No borders on shapes\n  let ratio = height / width; // Aspect ratio of canvas\n  let tilesX = map(mouseX, 0, width, 10, 100); // Number of tiles, dependent on mouseX\n  let tilesY = ratio * tilesX;\n  let tileSize = width / tilesX; // Size of each tile\n\n  // Loop through image pixels and draw rectangles\n  for (let y = 0; y < img.height; y += tileSize) {\n    for (let x = 0; x < img.width; x += tileSize) {\n      let c = img.get(x, y); // Get color from image pixel\n      let b = map(brightness(c), 0, 255, 1, 0); // Map brightness to a scale\n      push(); // Save current drawing state\n      translate(x, y); // Move coordinate system to tile\n      rect(0, 0, b * tileSize, b * tileSize); // Draw rectangle scaled by brightness\n      pop(); // Restore original drawing state\n    }\n  }\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e920f3f9f7b508ddb52ae",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-23T11:50:25.109Z",
+        "updatedAt": "2024-04-23T11:50:25.109Z",
+        "id": "661e920f3f9f7b508ddb52ae"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta namzze=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>p5.js and ML5.js Example</title>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/ml5@0.4.3/dist/ml5.min.js\"></script>\n</head>\n<body>\n    <script src=\"your-sketch.js\"></script>\n</body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e920f3f9f7b508ddb52af",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-23T11:50:25.109Z",
+        "updatedAt": "2024-04-23T11:50:25.109Z",
+        "id": "661e920f3f9f7b508ddb52af"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e920f3f9f7b508ddb52b0",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-23T11:50:25.109Z",
+        "updatedAt": "2024-04-23T11:50:25.109Z",
+        "id": "661e920f3f9f7b508ddb52b0"
+      },
+      {
+        "name": "bw2.jpg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e929b3f9f7b508ddb52b2",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/db71fe0a-a0ed-40e9-a937-20e310383fd3.jpg",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-23T11:50:25.109Z",
+        "updatedAt": "2024-04-23T11:50:25.109Z",
+        "id": "661e929b3f9f7b508ddb52b2"
+      }
+    ],
+    "createdAt": "2024-04-16T15:39:07.485Z",
+    "id": "Z2wnB1GRX"
+  },
+  {
+    "name": "ims06-paulineium",
+    "_id": "9EiCMF9cV",
+    "updatedAt": "2024-04-30T13:28:14.834Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "6630da66fe7096970ce72cf5",
+          "6630da70fe7096970ce72cf6",
+          "6630da7afe7096970ce72cf7",
+          "6630da90fe7096970ce72cf9",
+          "6630da88fe7096970ce72cf8",
+          "6630d98cfe7096970ce72cf1",
+          "6630d98cfe7096970ce72cf0",
+          "6630d98cfe7096970ce72cf2"
+        ],
+        "fileType": "folder",
+        "_id": "6630d98cfe7096970ce72cf3",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630d98cfe7096970ce72cf3"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// The sketch creates an animated graphics display where two images are combined in a tiling process, with each tile's content and size determined by sine wave functions\n\n// I'm using p5.Graphics to draw into an off-screen graphics buffer (ref. https://p5js.org/reference/#/p5/createGraphics)\n\nlet pg, pg2, buffer;\nlet img, img2;\nlet sans;\n\n// Load data\nfunction preload() {\n  img = loadImage(\"2.jpg\");\n  img2 = loadImage(\"3.jpeg\");\n  sans = loadFont(\"StretchPro.otf\");\n}\n\nfunction setup() {\n  createCanvas(windowWidth, windowHeight);\n  frameRate(10);\n  \n  // Graphic buffers created to store rendering content separately from the main canvas\n  pg = createGraphics(586, 810);\n  pg2 = createGraphics(586, 810);\n  buffer = createGraphics(586, 810);\n}\n\nfunction draw() {\n  background(0);\n  // Drawing in separate buffers\n  drawPg();\n  drawPg2();\n\n  buffer.background(241, 241, 241);\n  \n  // Obtaining from original images to break into tiles\n  let i1 = pg.get();\n  let i2 = pg2.get();\n\n  let tilesX = pg.width / 6;\n  let tilesY = pg.height / 6;\n  let tileW = pg.width / tilesX;\n  let tileH = pg.height / tilesY;\n\n  buffer.noStroke();\n  \n  // Stores sine wave values that are mapped to each tile\n  let waves = [];\n\n  for (let x = 0; x < tilesX; x++) {\n    for (let y = 0; y < tilesY; y++) {\n      waves.push(sin(radians(frameCount * 3 + x * 0.3 + y * 0.3)));\n    }\n  }\n\n  let idx = 0;\n\n  for (let x = 0; x < tilesX; x++) {\n    for (let y = 0; y < tilesY; y++) {\n      let c1 = i1.get(int(x * tileW), int(y * tileH));\n      let c2 = i2.get(int(x * tileW), int(y * tileH));\n      let wave = map(waves[idx++], -1, 1, 0, 1);\n      let c3 = lerpColor(color(c1), color(c2), wave);\n      let bri = brightness(c3);\n\n      let sizeW = map(bri, 0, 255, tileW, 0);\n      let sizeH = map(bri, 0, 255, tileH, 0);\n\n      buffer.fill(48, 93, 191);\n      buffer.rect(x * tileW, y * tileH, sizeW * 1.2, sizeH * 1.2);\n    }\n  }\n\n  imageMode(CENTER);\n  image(buffer, width / 2, height / 2);\n}\n\nfunction drawPg() {\n  pg.background(17, 17, 17);\n  pg.imageMode(CENTER);\n  \n  // Display image\n  pg.push();\n  pg.translate(pg.width / 2, pg.height / 2);\n  let wave1 = map(sin(radians(frameCount)), -1, 1, 0.8, 0.5);\n  pg.scale(wave1);\n  pg.image(img, 0, 0);\n  pg.pop();\n\n  pg.textFont(sans);\n  pg.textAlign(CENTER, CENTER);\n  pg.textSize(450);\n  pg.fill(0);\n  \n // Text style\n  let txt = \"JO\";\n  let wave2 = map(tan(radians(frameCount)), -1, 1, -100, 100);\n  pg.push();\n  pg.translate(pg.width / 2 + wave2, pg.height / 2 - 40);\n  pg.text(txt, 0, 0);\n  pg.pop();\n}\n\nfunction drawPg2() {\n  pg2.background(17, 17, 17);\n  pg2.imageMode(CENTER);\n  \n  // Display image\n  pg2.push();\n  pg2.translate(pg2.width / 2, pg2.height / 2);\n  let wave1 = map(sin(radians(frameCount)), -1, 1, 0.5, 0.7);\n  pg2.scale(wave1);\n  pg2.image(img2, 0, 0);\n  pg2.pop();\n  \n  // Text style\n  pg2.textFont(sans);\n  pg2.textAlign(CENTER, CENTER);\n  pg2.textSize(450);\n  pg2.fill(255, 0, 0);\n  \n  // Display text\n  let txt = \"ZU\";\n  let wave2 = map(tan(radians(frameCount)), -1, 1, -100, 100);\n  pg2.push();\n  pg2.translate(pg2.width / 2 - wave2, pg2.height / 2 - 40);\n  pg2.text(txt, 0, 0);\n  pg2.pop();\n}\n\n// Fullscreen\nfunction keyPressed() {\n  if (key === 'f' || key === 'F') {\n    let fs = fullscreen();\n    fullscreen(!fs);\n    resizeCanvas(windowWidth, windowHeight);\n  }\n}\n\nfunction windowResized() {\n  resizeCanvas(windowWidth, windowHeight);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630d98cfe7096970ce72cf0",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630d98cfe7096970ce72cf0"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630d98cfe7096970ce72cf1",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630d98cfe7096970ce72cf1"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630d98cfe7096970ce72cf2",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630d98cfe7096970ce72cf2"
+      },
+      {
+        "name": "2.jpg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630da66fe7096970ce72cf5",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/d4f322ff-6eac-43e8-9e02-1ddff7495c58.jpg",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630da66fe7096970ce72cf5"
+      },
+      {
+        "name": "3.jpeg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630da70fe7096970ce72cf6",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/abff6bb7-126e-4fce-962b-7158bc4bc2d8.jpeg",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630da70fe7096970ce72cf6"
+      },
+      {
+        "name": "DarlingtonDemo-z8xjG.ttf",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630da7afe7096970ce72cf7",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/892e894e-cb3e-495a-abee-133e3cf75471.ttf",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630da7afe7096970ce72cf7"
+      },
+      {
+        "name": "StretchPro.otf",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630da88fe7096970ce72cf8",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/bfd53c47-b225-46b7-96a9-92df5f5852f4.otf",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630da88fe7096970ce72cf8"
+      },
+      {
+        "name": "PublicSans-VariableFont_wght.ttf",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "6630da90fe7096970ce72cf9",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/9937371b-213a-4cb0-a2a2-149619d29d10.ttf",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-30T13:28:14.834Z",
+        "updatedAt": "2024-04-30T13:28:14.834Z",
+        "id": "6630da90fe7096970ce72cf9"
+      }
+    ],
+    "createdAt": "2024-04-30T11:50:40.083Z",
+    "id": "9EiCMF9cV"
   },
   {
     "name": "landscape",
@@ -2261,6 +2723,76 @@
     ],
     "createdAt": "2020-10-08T17:09:49.872Z",
     "id": "6B7E1bXnU"
+  },
+  {
+    "name": "Safe law",
+    "_id": "msKIwfui3",
+    "updatedAt": "2024-04-16T14:58:05.393Z",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "661e91253f9f7b508ddb52aa",
+          "661e916d3f9f7b508ddb52ad",
+          "661e91253f9f7b508ddb52a9",
+          "661e91253f9f7b508ddb52ab"
+        ],
+        "fileType": "folder",
+        "_id": "661e91253f9f7b508ddb52ac",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T14:58:05.393Z",
+        "updatedAt": "2024-04-16T14:58:05.393Z",
+        "id": "661e91253f9f7b508ddb52ac"
+      },
+      {
+        "name": "sketch.js",
+        "content": "let img;\n\nfunction setup() {\n  createCanvas(900, 900, WEBGL);\n  img = loadImage(\"portrait.jpg\", function(img) {\n    img.resize(900, 900);\n  });\n}\n\nfunction draw() {\n  background(241);\n  noStroke();\n  // sphereDetail(3); // Commented out to check if the rest of the sketch works.\n  let tiles = 150;\n  let tileSize = width / tiles;\n  rotateY(radians(frameCount));\n  for (let x = 0; x < tiles; x++) {\n    for (let y = 0; y < tiles; y++) {\n      let c = img.get(int(x * tileSize), int(y * tileSize));\n      let b = map(brightness(c), 0, 255, 1, 0);\n      let z = map(b, 0, 1, -100, 100);\n      push();\n      translate(x * tileSize - width / 2, y * tileSize - height / 2, z);\n      fill(c);\n      sphere(tileSize * b * 0.8);\n      pop();\n    }\n  }\n}\n\nfunction brightness(c) {\n  return (red(c) + green(c) + blue(c)) / 3;\n}\n\nfunction radians(degrees) {\n  return degrees * (PI / 180);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e91253f9f7b508ddb52a9",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T14:58:05.393Z",
+        "updatedAt": "2024-04-16T14:58:05.393Z",
+        "id": "661e91253f9f7b508ddb52a9"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/addons/p5.sound.min.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.dom.min.js\"></script>\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e91253f9f7b508ddb52aa",
+        "isSelectedFile": true,
+        "createdAt": "2024-04-16T14:58:05.393Z",
+        "updatedAt": "2024-04-16T14:58:05.393Z",
+        "id": "661e91253f9f7b508ddb52aa"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e91253f9f7b508ddb52ab",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T14:58:05.393Z",
+        "updatedAt": "2024-04-16T14:58:05.393Z",
+        "id": "661e91253f9f7b508ddb52ab"
+      },
+      {
+        "name": "portrait.jpg",
+        "content": "",
+        "children": [],
+        "fileType": "file",
+        "_id": "661e916d3f9f7b508ddb52ad",
+        "url": "https://assets.editor.p5js.org/5f6c7dfb3a46fa002484f282/4569e972-b8d2-49a7-ade6-0103b69981b5.jpg",
+        "isSelectedFile": false,
+        "createdAt": "2024-04-16T14:58:05.393Z",
+        "updatedAt": "2024-04-16T14:58:05.393Z",
+        "id": "661e916d3f9f7b508ddb52ad"
+      }
+    ],
+    "createdAt": "2024-04-16T14:56:44.639Z",
+    "id": "msKIwfui3"
   },
   {
     "name": "sagittarius",
